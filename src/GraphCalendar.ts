@@ -5,23 +5,21 @@ import {
   CARD_WIDTH,
   TODAY,
 } from "./constants";
-import { MacroCalendarLevel } from "./types";
+import {
+  GraphCalendarRenderCallbackFunction,
+  MacroCalendarLevel,
+} from "./types";
 import calculateSiblingNodes from "./calculate-sibling-nodes";
 import Hammer from "hammerjs";
 import { DateNode } from "./DateNode";
 import calculateTree from "./calculate-tree";
 
 export class GraphCalendar {
-  // CALENDAR LOCATION
   private baseNode: DateNode;
-  // private tree: DateNode[];
-
-  //CALENDAR CONTROLS
   private mc: HammerManager | undefined = undefined;
   private x = 0;
   private xVelocity = 0;
   private xMemo = 0;
-  private calendarWidth = 0;
   private cachedVirtualBase?: DateNode;
   private cachedSiblings: DateNode[] = [];
   private cachedParents: DateNode[] = [];
@@ -29,24 +27,11 @@ export class GraphCalendar {
   private cachedParentHeight: number = 0;
 
   private tick = DateTime.now();
+
   constructor(
-    private moveCallBack: ({
-      calendarX,
-      parentHeight,
-      siblingNodes,
-      parentNodes,
-      childNodes,
-      baseNode,
-    }: {
-      calendarX: number;
-      parentHeight: number;
-      siblingNodes: DateNode[];
-      parentNodes: DateNode[];
-      childNodes: DateNode[];
-      baseNode: DateNode;
-    }) => void,
-    baseNode = DateNode.getStartNode(),
-    calendarWidth: number
+    private calendarWidth: number,
+    private moveCallBack: GraphCalendarRenderCallbackFunction,
+    baseNode = DateNode.getStartNode()
   ) {
     this.baseNode = baseNode;
 
@@ -64,7 +49,6 @@ export class GraphCalendar {
 
     this.requestUpdate();
     this.jumpToNode(baseNode);
-    this.calendarWidth = calendarWidth;
   }
   public getTick() {
     return this.tick;

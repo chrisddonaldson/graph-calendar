@@ -52,3 +52,19 @@ export type MicroCalendarLevel = {
   parent?: MicroLevelType;
   child?: MicroLevelType;
 };
+
+export type GraphCalendarRenderCallbackFunction = ({
+  calendarX,
+  parentHeight,
+  siblingNodes,
+  parentNodes,
+  childNodes,
+  baseNode,
+}: {
+  calendarX: number;
+  parentHeight: number;
+  siblingNodes: DateNode[];
+  parentNodes: DateNode[];
+  childNodes: DateNode[];
+  baseNode: DateNode;
+}) => void;

@@ -4,3 +4,4 @@ export { GraphCalendar } from "./GraphCalendar";
 export { DateNode } from "./DateNode";
 
 export * from "./constants";
+export type * from "./types";
