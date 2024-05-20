@@ -52,8 +52,3 @@ export type MicroCalendarLevel = {
   parent?: MicroLevelType;
   child?: MicroLevelType;
 };
-
-export type TileProps = {
-  dateNode: DateNode;
-  isSmall: boolean;
-};
