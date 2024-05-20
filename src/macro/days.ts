@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
-import { CalendarLevel } from "../types";
+import { MacroCalendarLevel } from "../types";
 
-export const days: CalendarLevel = {
+export const days: MacroCalendarLevel = {
   name: "days",
   durationKey: "days",
   factor: 1,
@@ -13,7 +13,7 @@ export const days: CalendarLevel = {
       hour: 0,
     }),
   convertToDays: () => 1,
-  isTick: false,
+
   convertToMinutes: () => 24 * 60,
   levelAverageMinutes: 24 * 60,
   getIdFromDate: (date) => date.toFormat("yyyy-MM-dd"),

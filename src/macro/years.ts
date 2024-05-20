@@ -1,6 +1,6 @@
-import { CalendarLevel } from "../types";
+import { MacroCalendarLevel } from "../types";
 
-export const years: CalendarLevel = {
+export const years: MacroCalendarLevel = {
   name: "years",
   durationKey: "years",
   factor: 1,
@@ -14,7 +14,7 @@ export const years: CalendarLevel = {
       month: 1,
       day: 1,
     }),
-  isTick: false,
+
   convertToMinutes: (date) => date.daysInYear * 24 * 60,
   levelAverageMinutes: 365 * 24 * 60,
   getIdFromDate: (date) => date.toFormat("yyyy"),

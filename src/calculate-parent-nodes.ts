@@ -1,12 +1,16 @@
 import { DateNode } from "./DateNode";
 import macroConfig from "./macro";
-import { CalendarLevel } from "./types";
+import { MacroCalendarLevel } from "./types";
 
 export default function calculateParentNode(
   root: DateNode,
-  referenceLevel: CalendarLevel
+  referenceLevel: MacroCalendarLevel
 ): DateNode[] {
-  const parentLevel = macroConfig[root.getLevel.parent ?? ""] as CalendarLevel;
+  if (!root.getLevel.parent) {
+    console.warn(`No parent node label for ${root.getLevel.name}`);
+    return [];
+  }
+  const parentLevel = macroConfig[root.getLevel.parent];
 
   if (!parentLevel) {
     return [];
@@ -19,16 +23,15 @@ export default function calculateParentNode(
   const recursion = (node: DateNode) => {
     res.push(node);
     depth = depth - 1;
-    const parentLevelInterior = macroConfig[
-      node.getLevel.parent ?? ""
-    ] as CalendarLevel;
-    if (parentLevelInterior) {
-      recursion(
-        new DateNode(root.getDate, parentLevelInterior, referenceLevel, depth)
-      );
-    } else {
+
+    if (!node.getLevel.parent) {
       return;
     }
+
+    const parentLevelInterior = macroConfig[node.getLevel.parent];
+    recursion(
+      new DateNode(root.getDate, parentLevelInterior, referenceLevel, depth)
+    );
   };
 
   recursion(startNode);

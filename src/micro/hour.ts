@@ -1,6 +1,6 @@
-import { CalendarLevel } from "../types";
+import { MicroCalendarLevel } from "../types";
 
-const config: CalendarLevel = {
+const config: MicroCalendarLevel = {
   name: "hours",
   durationKey: "hours",
   convertToDays: () => 1 / 24,
@@ -11,7 +11,6 @@ const config: CalendarLevel = {
       second: 0,
       minute: 0,
     }),
-  isTick: true,
   convertToMinutes: () => 60,
   levelAverageMinutes: 60,
   getIdFromDate: (date) => `h-${date.toFormat("yyyy-MM-dd-HH-mm")}`,

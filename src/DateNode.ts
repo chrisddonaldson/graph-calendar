@@ -1,5 +1,5 @@
 import { DateTime, Interval } from "luxon";
-import { CalendarLevel } from "./types";
+import { MacroCalendarLevel } from "./types";
 import { CARD_WIDTH, TODAY } from "./constants";
 import macroConfig from "./macro";
 import calculateSiblingNodes from "./calculate-sibling-nodes";
@@ -10,7 +10,7 @@ export class DateNode {
   }
 
   private date: DateTime;
-  private level: CalendarLevel;
+  private level: MacroCalendarLevel;
   private depth;
   private xIndex;
   private id;
@@ -20,8 +20,8 @@ export class DateNode {
 
   constructor(
     date: DateTime,
-    level: CalendarLevel,
-    referenceLevel?: CalendarLevel,
+    level: MacroCalendarLevel,
+    referenceLevel?: MacroCalendarLevel,
     depth: number = 0,
     xIndex: number = 0
   ) {
@@ -36,7 +36,7 @@ export class DateNode {
     this.xIndex = xIndex;
   }
 
-  private getXPositionInPixels(referenceLevel: CalendarLevel) {
+  private getXPositionInPixels(referenceLevel: MacroCalendarLevel) {
     const interval =
       TODAY < this.date
         ? Interval.fromDateTimes(TODAY, this.date)
@@ -52,7 +52,7 @@ export class DateNode {
     return +normalised.toFixed();
   }
 
-  private getDateWidthInPixels(referenceLevel: CalendarLevel) {
+  private getDateWidthInPixels(referenceLevel: MacroCalendarLevel) {
     const numberOfMins = this.level.convertToMinutes(this.date);
     const sizeOfMin = CARD_WIDTH / referenceLevel.levelAverageMinutes;
     return +(numberOfMins * sizeOfMin).toFixed();

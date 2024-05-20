@@ -5,12 +5,11 @@ import {
   CARD_WIDTH,
   TODAY,
 } from "./constants";
-import { CalendarLevel } from "./types";
+import { MacroCalendarLevel } from "./types";
 import calculateSiblingNodes from "./calculate-sibling-nodes";
 import Hammer from "hammerjs";
 import { DateNode } from "./DateNode";
 import calculateTree from "./calculate-tree";
-import getCalendarRect from "./get-calendar-rect";
 
 export class GraphCalendar {
   // CALENDAR LOCATION
@@ -18,11 +17,11 @@ export class GraphCalendar {
   // private tree: DateNode[];
 
   //CALENDAR CONTROLS
-  private mc: Hammer | undefined = undefined;
+  private mc: HammerManager | undefined = undefined;
   private x = 0;
   private xVelocity = 0;
   private xMemo = 0;
-
+  private calendarWidth = 0;
   private cachedVirtualBase?: DateNode;
   private cachedSiblings: DateNode[] = [];
   private cachedParents: DateNode[] = [];
@@ -46,7 +45,8 @@ export class GraphCalendar {
       childNodes: DateNode[];
       baseNode: DateNode;
     }) => void,
-    baseNode = DateNode.getStartNode()
+    baseNode = DateNode.getStartNode(),
+    calendarWidth: number
   ) {
     this.baseNode = baseNode;
 
@@ -64,6 +64,7 @@ export class GraphCalendar {
 
     this.requestUpdate();
     this.jumpToNode(baseNode);
+    this.calendarWidth = calendarWidth;
   }
   public getTick() {
     return this.tick;
@@ -90,7 +91,7 @@ export class GraphCalendar {
     this.cachedVirtualBase = newVirtualBase;
     this.cachedSiblings = calculateSiblingNodes(
       newVirtualBase,
-      +(window.innerWidth / CARD_WIDTH).toFixed(0) + 1
+      +(this.calendarWidth / CARD_WIDTH).toFixed(0) + 1
     );
     const { parentHeight, parents, children } = calculateTree(
       this.cachedSiblings,
@@ -107,7 +108,10 @@ export class GraphCalendar {
     };
   }
 
-  public setBaseNodeFromDateAndLevel(date: DateTime, level: CalendarLevel) {
+  public setBaseNodeFromDateAndLevel(
+    date: DateTime,
+    level: MacroCalendarLevel
+  ) {
     const flatDate = level.transformToType(date);
     const newBaseNode = new DateNode(flatDate, level);
     this.baseNode = newBaseNode;
@@ -116,7 +120,7 @@ export class GraphCalendar {
 
   public setBaseNodeFromNode(dateNode: DateNode) {
     this.baseNode = dateNode;
-    this.xMemo = getHalfCalendarScreen();
+    this.xMemo = 0;
     this.requestUpdate();
   }
 
@@ -188,9 +192,4 @@ export class GraphCalendar {
       baseNode: this.baseNode,
     });
   }
-}
-
-export function getHalfCalendarScreen() {
-  const rect = getCalendarRect();
-  return rect ? rect.width / 2 : 0;
 }

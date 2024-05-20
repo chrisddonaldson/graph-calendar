@@ -1,8 +1,6 @@
-import { CalendarLevel } from "../types";
-import { months } from "./months";
-import { years } from "./years";
+import { MacroCalendarLevel } from "../types";
 
-export const quarters: CalendarLevel = {
+export const quarters: MacroCalendarLevel = {
   name: "quarters",
   durationKey: "months",
   factor: 3,
@@ -36,7 +34,7 @@ export const quarters: CalendarLevel = {
       month: q * 3 + 1,
     });
   },
-  isTick: false,
+
   convertToMinutes: (date) => {
     const zeroIndexMonth = date.month - 1;
     let x1 = 0;

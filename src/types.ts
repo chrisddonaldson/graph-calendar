@@ -27,18 +27,30 @@ export type MicroLevelType =
   | "half-days"
   | "hours";
 
-export type CalendarLevel = {
-  name: MacroLevelType | MicroLevelType;
+export type MacroCalendarLevel = {
+  name: MacroLevelType;
   durationKey: DurationKeys;
   convertToDays: (date: DateTime) => number;
   factor: number;
   transformToType: (date: DateTime) => DateTime;
-  isTick: boolean;
   convertToMinutes: (date: DateTime) => number;
   levelAverageMinutes: number;
   getIdFromDate: (date: DateTime) => string;
-  parent?: string;
-  child?: string;
+  parent?: MacroLevelType;
+  child?: MacroLevelType;
+};
+
+export type MicroCalendarLevel = {
+  name: MicroLevelType;
+  durationKey: DurationKeys;
+  convertToDays: (date: DateTime) => number;
+  factor: number;
+  transformToType: (date: DateTime) => DateTime;
+  convertToMinutes: (date: DateTime) => number;
+  levelAverageMinutes: number;
+  getIdFromDate: (date: DateTime) => string;
+  parent?: MicroLevelType;
+  child?: MicroLevelType;
 };
 
 export type TileProps = {

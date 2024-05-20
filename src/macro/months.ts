@@ -1,6 +1,6 @@
-import { CalendarLevel } from "../types";
+import { MacroCalendarLevel } from "../types";
 
-export const months: CalendarLevel = {
+export const months: MacroCalendarLevel = {
   name: "months",
   durationKey: "months",
   convertToDays: (date) => date.daysInMonth ?? 31,
@@ -13,7 +13,7 @@ export const months: CalendarLevel = {
       hour: 0,
       day: 1,
     }),
-  isTick: false,
+
   convertToMinutes: (date) => (date.daysInMonth ?? 1) * 24 * 60,
   levelAverageMinutes: 28 * 24 * 60,
   getIdFromDate: (date) => date.toFormat("yyyy-MM"),

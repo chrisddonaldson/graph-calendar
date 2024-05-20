@@ -1,6 +1,6 @@
-import { CalendarLevel } from "../types";
+import { MacroCalendarLevel } from "../types";
 
-export const weeks: CalendarLevel = {
+export const weeks: MacroCalendarLevel = {
   name: "weeks",
   durationKey: "weeks",
   convertToDays: () => 7,
@@ -22,7 +22,7 @@ export const weeks: CalendarLevel = {
     }
     return res;
   },
-  isTick: false,
+
   convertToMinutes: () => 7 * 24 * 60,
   levelAverageMinutes: 7 * 24 * 60,
   getIdFromDate: (date) => date.toFormat("yyyy-WW"),

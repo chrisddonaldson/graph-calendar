@@ -1,13 +1,13 @@
 import { Interval } from "luxon";
 import { DateNode } from "./DateNode";
 import macroConfig from "./macro";
-import { CalendarLevel } from "./types";
+import { MacroLevelType } from "./types";
 
 // Given a node, calculate the children to a certain depth based on the configs.
 export default function calculateChildNodes(start: DateNode) {
   const startDate = start.getDate;
   const level = start.getLevel;
-  const childLevel = macroConfig[start.getLevel.child ?? ""] as CalendarLevel;
+  const childLevel = macroConfig[start.getLevel.child as MacroLevelType];
 
   if (!childLevel) {
     return [];

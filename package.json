@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/hammerjs": "^2.0.45",
     "@types/jest": "^29.5.12",
+    "@types/luxon": "^3.4.2",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.2",
     "typescript": "^5.4.5"

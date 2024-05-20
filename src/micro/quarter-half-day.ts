@@ -1,6 +1,6 @@
-import { CalendarLevel } from "../types";
+import { MicroCalendarLevel } from "../types";
 
-const config: CalendarLevel = {
+const config: MicroCalendarLevel = {
   name: "quarter-half-days",
   durationKey: "hours",
   convertToDays: () => 1 / 8,
@@ -11,7 +11,6 @@ const config: CalendarLevel = {
       second: 0,
       minute: 0,
     }),
-  isTick: true,
   convertToMinutes: () => 3 * 60,
   levelAverageMinutes: 3 * 60,
   getIdFromDate: (date) => `qhd-${date.toFormat("yyyy-MM-dd-HH-mm")}`,
