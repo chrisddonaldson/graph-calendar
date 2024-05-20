@@ -1,6 +1,8 @@
 import { DateNode } from "./DateNode";
-import macroConfig from "./macro";
-import { MacroCalendarLevel } from "./types";
+import macroConfig from "./configs/macro";
+import { MacroCalendarLevel } from "../types";
+
+// Takes and array of siblings, calculates their parents and pushes them to a map to remove duplicates
 
 export default function calculateParentNode(
   root: DateNode,

@@ -1,7 +1,7 @@
 import { Interval } from "luxon";
 import { DateNode } from "./DateNode";
-import macroConfig from "./macro";
-import { MacroLevelType } from "./types";
+import macroConfig from "./configs/macro";
+import { MacroLevelType } from "../types";
 
 // Given a node, calculate the children to a certain depth based on the configs.
 export default function calculateChildNodes(start: DateNode) {

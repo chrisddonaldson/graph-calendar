@@ -1,4 +1,4 @@
-import { MacroCalendarLevel } from "../types";
+import { MacroCalendarLevel } from "../../../types";
 
 export const weeks: MacroCalendarLevel = {
   name: "weeks",

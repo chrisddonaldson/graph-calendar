@@ -1,10 +1,10 @@
-import { MicroCalendarLevel } from "../types";
+import { MicroCalendarLevel } from "../../../types";
 
 const config: MicroCalendarLevel = {
-  name: "five-minutes",
+  name: "minutes",
   durationKey: "minutes",
-  convertToDays: () => (1 / 24 / 60) * 5,
-  factor: 5,
+  convertToDays: () => 1 / 24 / 60,
+  factor: 1,
   transformToType: (date) =>
     date.set({
       millisecond: 0,
@@ -12,7 +12,7 @@ const config: MicroCalendarLevel = {
     }),
   convertToMinutes: () => 5,
   levelAverageMinutes: 5,
-  getIdFromDate: (date) => `fm-${date.toFormat("yyyy-MM-dd-HH-mm")}`,
+  getIdFromDate: (date) => `m-${date.toFormat("yyyy-MM-dd-HH-mm")}`,
 };
 
 export default config;

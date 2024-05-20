@@ -1,4 +1,4 @@
-import { MicroCalendarLevel } from "../types";
+import { MicroCalendarLevel } from "../../../types";
 
 const config: MicroCalendarLevel = {
   name: "fifteen-minutes",

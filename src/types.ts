@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { DateNode } from "./DateNode";
+import { DateNode } from "./date-node/DateNode";
 
 export type DurationKeys =
   | "years"

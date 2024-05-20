@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { MacroCalendarLevel } from "../types";
+import { MacroCalendarLevel } from "../../../types";
 
 export const days: MacroCalendarLevel = {
   name: "days",
