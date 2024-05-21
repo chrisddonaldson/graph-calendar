@@ -3,7 +3,6 @@ import { MicroCalendarLevel } from "../../../types";
 const config: MicroCalendarLevel = {
   name: "minutes",
   durationKey: "minutes",
-  convertToDays: () => 1 / 24 / 60,
   factor: 1,
   transformToType: (date) =>
     date.set({

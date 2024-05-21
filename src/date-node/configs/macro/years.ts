@@ -4,7 +4,6 @@ export const years: MacroCalendarLevel = {
   name: "years",
   durationKey: "years",
   factor: 1,
-  convertToDays: (date) => date.daysInYear,
   transformToType: (date) =>
     date.set({
       millisecond: 0,

@@ -30,7 +30,6 @@ export type MicroLevelType =
 export type MacroCalendarLevel = {
   name: MacroLevelType;
   durationKey: DurationKeys;
-  convertToDays: (date: DateTime) => number;
   factor: number;
   transformToType: (date: DateTime) => DateTime;
   convertToMinutes: (date: DateTime) => number;
@@ -43,7 +42,6 @@ export type MacroCalendarLevel = {
 export type MicroCalendarLevel = {
   name: MicroLevelType;
   durationKey: DurationKeys;
-  convertToDays: (date: DateTime) => number;
   factor: number;
   transformToType: (date: DateTime) => DateTime;
   convertToMinutes: (date: DateTime) => number;

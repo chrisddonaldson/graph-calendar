@@ -3,7 +3,6 @@ import { MacroCalendarLevel } from "../../../types";
 export const months: MacroCalendarLevel = {
   name: "months",
   durationKey: "months",
-  convertToDays: (date) => date.daysInMonth ?? 31,
   factor: 1,
   transformToType: (date) =>
     date.set({

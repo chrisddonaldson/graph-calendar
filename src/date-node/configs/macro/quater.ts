@@ -4,14 +4,6 @@ export const quarters: MacroCalendarLevel = {
   name: "quarters",
   durationKey: "months",
   factor: 3,
-  convertToDays: (date) => {
-    let res = 0;
-    for (let index = 0; index < 3; index++) {
-      const element = date.plus({ months: index });
-      res = res + (element.daysInMonth ?? 31);
-    }
-    return res;
-  },
   transformToType: (date) => {
     let q = 0;
     const zeroIndexMonth = date.month - 1;

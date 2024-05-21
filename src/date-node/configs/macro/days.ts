@@ -12,8 +12,6 @@ export const days: MacroCalendarLevel = {
       minute: 0,
       hour: 0,
     }),
-  convertToDays: () => 1,
-
   convertToMinutes: () => 24 * 60,
   levelAverageMinutes: 24 * 60,
   getIdFromDate: (date) => date.toFormat("yyyy-MM-dd"),

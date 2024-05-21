@@ -3,7 +3,6 @@ import { MacroCalendarLevel } from "../../../types";
 export const weeks: MacroCalendarLevel = {
   name: "weeks",
   durationKey: "weeks",
-  convertToDays: () => 7,
   factor: 1,
   transformToType: (date) => {
     let offset = date.weekday - 1;

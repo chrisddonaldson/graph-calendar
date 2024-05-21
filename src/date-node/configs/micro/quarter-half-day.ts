@@ -3,7 +3,6 @@ import { MicroCalendarLevel } from "../../../types";
 const config: MicroCalendarLevel = {
   name: "quarter-half-days",
   durationKey: "hours",
-  convertToDays: () => 1 / 8,
   factor: 3,
   transformToType: (date) =>
     date.set({
