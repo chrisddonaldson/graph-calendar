@@ -6,20 +6,20 @@ export const weeks: MacroCalendarLevel = {
   convertToDays: () => 7,
   factor: 1,
   transformToType: (date) => {
-    const newD = date.set({
+    let offset = date.weekday - 1;
+
+    let res = date.minus({ days: offset });
+
+    if (res.weekday !== 1) {
+      throw new Error("Week can't start without a monday!");
+    }
+    res = res.set({
       millisecond: 0,
       second: 0,
       minute: 0,
       hour: 0,
     });
 
-    const newW = newD.weekday - 1;
-
-    const res = date.minus({ days: newW });
-
-    if (res.weekday !== 1) {
-      throw new Error("Week can't start without a monday!");
-    }
     return res;
   },
 
