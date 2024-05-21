@@ -18,8 +18,6 @@ export default function calculateChildNodes(start: DateNode) {
 
   const interval = Interval.fromDateTimes(startDate, endDate);
 
-  const t = childLevel.durationKey;
-
   const duration =
     interval.toDuration(childLevel.durationKey).toObject()[
       childLevel.durationKey
@@ -35,7 +33,7 @@ export default function calculateChildNodes(start: DateNode) {
 
     nextStep = childLevel.transformToType(nextStep);
 
-    const nextNode = new DateNode(nextStep, childLevel, level);
+    const nextNode = new DateNode(nextStep, childLevel);
     res.push(nextNode);
   }
 

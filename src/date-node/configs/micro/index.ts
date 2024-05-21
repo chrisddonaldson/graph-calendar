@@ -1,4 +1,4 @@
-import { MicroCalendarLevel, MicroLevelType } from "../types";
+import { MicroCalendarLevel, MicroLevelType } from "../../../types";
 import { default as fifteenMinutes } from "./fifteen-minute";
 import { default as fiveMinutes } from "./five-minute";
 import { default as halfDays } from "./half-day";
