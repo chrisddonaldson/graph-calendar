@@ -1,15 +1,11 @@
 import { DateNode } from "../date-node/DateNode";
-import { MacroCalendarLevel } from "../types";
 
-export default function calculateUpperTree(
-  siblings: DateNode[],
-  referenceLevel: MacroCalendarLevel
-) {
+export default function calculateUpperTree(siblings: DateNode[]) {
   let parentHeight = 0;
   let parents: DateNode[] = [];
 
   siblings.map((node) => {
-    const parentsRes = node.calculateParentNodes(referenceLevel);
+    const parentsRes = node.calculateParents();
     parents = [...parents, ...parentsRes];
     parentHeight = Math.max(parentHeight, parentsRes.length);
   });

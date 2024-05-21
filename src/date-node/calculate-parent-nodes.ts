@@ -1,13 +1,8 @@
 import { DateNode } from "./DateNode";
 import macroConfig from "./configs/macro";
-import { MacroCalendarLevel } from "../types";
 
 // Takes and array of siblings, calculates their parents and pushes them to a map to remove duplicates
-
-export default function calculateParentNode(
-  root: DateNode,
-  referenceLevel: MacroCalendarLevel
-): DateNode[] {
+export default function calculateParentNode(root: DateNode): DateNode[] {
   if (!root.getLevel.parent) {
     console.warn(`No parent node label for ${root.getLevel.name}`);
     return [];
@@ -20,7 +15,7 @@ export default function calculateParentNode(
 
   const res: DateNode[] = [];
 
-  const startNode = new DateNode(root.getDate, parentLevel, referenceLevel);
+  const startNode = new DateNode(root.getDate, parentLevel);
   let depth = 0;
   const recursion = (node: DateNode) => {
     res.push(node);
@@ -31,9 +26,7 @@ export default function calculateParentNode(
     }
 
     const parentLevelInterior = macroConfig[node.getLevel.parent];
-    recursion(
-      new DateNode(root.getDate, parentLevelInterior, referenceLevel, depth)
-    );
+    recursion(new DateNode(root.getDate, parentLevelInterior, depth));
   };
 
   recursion(startNode);

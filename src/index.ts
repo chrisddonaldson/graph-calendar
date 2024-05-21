@@ -1,7 +1,9 @@
-export { default as macroConfig } from "./macro";
-export { default as microConfig } from "./micro";
-export { GraphCalendar } from "./graph-calendar/GraphCalendar";
+export { macroConfig, microConfig } from "./date-node/configs";
+
+export { default as GraphNodeController } from "./graph-node-controller";
+
 export { DateNode } from "./date-node/DateNode";
 
 export * from "./constants";
+
 export type * from "./types";

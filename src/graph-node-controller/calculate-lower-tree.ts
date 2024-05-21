@@ -6,7 +6,7 @@ export default function calculateLowerTree(siblings: DateNode[]) {
   let children: DateNode[] = [];
 
   siblings.map((node) => {
-    children = [...children, ...node.calculateChildNodes()];
+    children = [...children, ...node.calculateChildren()];
   });
 
   // Map nodes to delete duplicates

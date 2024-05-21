@@ -1,10 +1,10 @@
 import { DateTime, Interval } from "luxon";
 import { MacroCalendarLevel } from "../types";
-import { CARD_WIDTH, TODAY } from "../constants";
+import { CALENDAR_DATUM, TODAY } from "../constants";
 import macroConfig from "./configs/macro";
-import calculateSiblingNodes from "./calculate-sibling-nodes";
-import calculateChildNodes from "./calculate-child-nodes";
-import calculateParentNodes from "./calculate-parent-nodes";
+import calculateSiblings from "./calculate-sibling-nodes";
+import calculateChildren from "./calculate-child-nodes";
+import calculateParents from "./calculate-parent-nodes";
 
 // An enhanced date object
 // Holds all convenience methods for the journal
@@ -24,17 +24,14 @@ export class DateNode {
   constructor(
     date: DateTime,
     level: MacroCalendarLevel,
-    referenceLevel?: MacroCalendarLevel,
     depth: number = 0,
     xIndex: number = 0
   ) {
-    const ref = referenceLevel ? referenceLevel : level;
-
     this.id = level.getIdFromDate(date);
     this.date = level.transformToType(date);
     this.level = level;
-    this.x = this.getXPositionInPixels(ref);
-    this.w = this.getDateWidthInPixels(ref);
+    this.x = this.getXPositionInMinuets();
+    this.w = this.getDateWidthInMinuets();
     this.depth = depth;
     this.xIndex = xIndex;
   }
@@ -67,26 +64,21 @@ export class DateNode {
     this.depth = depth;
   }
 
-  private getXPositionInPixels(referenceLevel: MacroCalendarLevel) {
+  private getXPositionInMinuets() {
     const interval =
-      TODAY < this.date
-        ? Interval.fromDateTimes(TODAY, this.date)
-        : Interval.fromDateTimes(this.date, TODAY);
+      CALENDAR_DATUM < this.date
+        ? Interval.fromDateTimes(CALENDAR_DATUM, this.date)
+        : Interval.fromDateTimes(this.date, CALENDAR_DATUM);
     const lengthInMins =
-      TODAY < this.date
+      CALENDAR_DATUM < this.date
         ? interval.toDuration("minutes").minutes
         : -interval.toDuration("minutes").minutes;
 
-    const sizeOfMin = CARD_WIDTH / referenceLevel.levelAverageMinutes;
-    const normalised = lengthInMins * sizeOfMin;
-
-    return +normalised.toFixed();
+    return lengthInMins;
   }
 
-  private getDateWidthInPixels(referenceLevel: MacroCalendarLevel) {
-    const numberOfMins = this.level.convertToMinutes(this.date);
-    const sizeOfMin = CARD_WIDTH / referenceLevel.levelAverageMinutes;
-    return +(numberOfMins * sizeOfMin).toFixed();
+  private getDateWidthInMinuets() {
+    return this.level.convertToMinutes(this.date);
   }
 
   public isToday() {
@@ -95,18 +87,22 @@ export class DateNode {
     return trans === current;
   }
 
-  public getDirectSiblings() {
-    const output = calculateSiblingNodes(this, 1);
+  public calculateDirectSiblings() {
+    const output = calculateSiblings(this, 1);
     const left = output[0];
     const right = output[2];
     return { left, right };
   }
 
-  public calculateChildNodes() {
-    return calculateChildNodes(this);
+  public calculateSiblings(maxResults: number) {
+    return calculateSiblings(this, maxResults);
   }
 
-  public calculateParentNodes(referenceLevel: MacroCalendarLevel) {
-    return calculateParentNodes(this, referenceLevel);
+  public calculateChildren() {
+    return calculateChildren(this);
+  }
+
+  public calculateParents() {
+    return calculateParents(this);
   }
 }

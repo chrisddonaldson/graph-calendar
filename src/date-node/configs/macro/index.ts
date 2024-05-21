@@ -1,4 +1,4 @@
-import { MacroCalendarLevel, MacroLevelType } from "../types";
+import { MacroLevelType, MacroCalendarLevel } from "../../../types";
 import { days } from "./days";
 import { decades } from "./decades";
 import { months } from "./months";
